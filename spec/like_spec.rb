@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Follow, type: :model do
+RSpec.describe Like, type: :model do
   subject do
     described_class.new(
-      follower_id: ''
+      post_id: ''
     )
-  end 
+  end
 
   describe 'Validations' do
     it 'is not valid without valid attributes' do
@@ -14,7 +14,7 @@ RSpec.describe Follow, type: :model do
   end
 
   describe 'Associations' do
-    it { should belong_to(:follower) }
-    it { should belong_to(:leader) }
+    it { should belong_to(:user) }
+    it { should belong_to(:post) }
   end
 end

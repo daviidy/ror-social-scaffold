@@ -20,7 +20,7 @@ class User < ApplicationRecord
     # user is the follower so we take all of his leaders
     friends_array = followers.map { |follow| follow.leader if follow.status == true }
     # user is the leader so we take all of his followers
-    friends_array.concat leaders.map { |follow| follow.follower if follow.status == true }
+    friends_array.concat(leaders.map { |follow| follow.follower if follow.status == true })
     friends_array.compact
   end
 
@@ -35,9 +35,9 @@ class User < ApplicationRecord
   end
 
   def confirm_friend(user)
-    follow = leaders.find { |follow| follow.follower == user }
-    follow.status = true
-    follow.save
+    following = leaders.find { |follow| follow.follower == user }
+    following.status = true
+    following.save
   end
 
   def friend?(user)

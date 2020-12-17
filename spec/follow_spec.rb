@@ -5,7 +5,7 @@ RSpec.describe Follow, type: :model do
     described_class.new(
       follower_id: ''
     )
-  end 
+  end
 
   describe 'Validations' do
     it 'is not valid without valid attributes' do

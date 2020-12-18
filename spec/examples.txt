@@ -1,5 +1,6 @@
-example_id                       | status | run_time        |
--------------------------------- | ------ | --------------- |
-./spec/friendship_spec.rb[1:1:1] | passed | 1.62 seconds    |
-./spec/friendship_spec.rb[1:2:1] | passed | 0.05843 seconds |
-./spec/friendship_spec.rb[1:2:2] | passed | 0.01099 seconds |
+example_id                                       | status | run_time        |
+------------------------------------------------ | ------ | --------------- |
+./spec/features/send_friend_request_spec.rb[1:1] | passed | 13.63 seconds   |
+./spec/friendship_spec.rb[1:1:1]                 | passed | 1.62 seconds    |
+./spec/friendship_spec.rb[1:2:1]                 | passed | 0.05843 seconds |
+./spec/friendship_spec.rb[1:2:2]                 | passed | 0.01099 seconds |

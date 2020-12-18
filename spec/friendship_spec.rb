@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Follow, type: :model do
+RSpec.describe Friendship, type: :model do
   subject do
     described_class.new(
-      follower_id: ''
+      user_id: ''
     )
   end
 
@@ -14,7 +14,7 @@ RSpec.describe Follow, type: :model do
   end
 
   describe 'Associations' do
-    it { should belong_to(:follower) }
-    it { should belong_to(:leader) }
+    it { should belong_to(:user) }
+    it { should belong_to(:friend) }
   end
 end

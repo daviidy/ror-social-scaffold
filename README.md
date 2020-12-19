@@ -67,11 +67,17 @@ Open `http://localhost:3000/` in your browser.
 
 ### Deployment
 
-TBA
+You can find the demo [here](https://agile-thicket-24473.herokuapp.com/)
 
 ## Authors
 
-TBA
+👤 **Author1**
+
+- Github: [@AkintoyeOlamide](https://github.com/AkintoyeOlamide)
+
+👤 **Author2**
+
+- Github: [@daviidy](https://github.com/daviidy)
 
 ## 🤝 Contributing
 
@@ -90,4 +96,3 @@ TBA
 ## 📝 License
 
 TBA
-

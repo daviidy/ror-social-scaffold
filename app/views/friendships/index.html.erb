@@ -1,5 +1,5 @@
 <section class="users-section">
-  <h2>Friends</h2>
+  <h2>Friends (who accepted my invitation)</h2>
   <ul class="users-list">
     <% current_user.friends.each do |friend| %>
     <li>
@@ -13,9 +13,9 @@
 </section>
 
 <section class="users-section">
-  <h2>Pending Invitations(from other users) </h2>
+  <h2>Pending Friends(invitations sent) </h2>
   <ul class="users-list">
-    <% current_user.friend_requests.each do |friend| %>
+    <% current_user.pending_friends.each do |friend| %>
     <li>
       Name: <%= friend.name %>
       <span class="profile-link">
@@ -23,10 +23,7 @@
       </span>
       |
       <span class="profile-link">
-        <%= link_to 'Confirm',  confirm_path(user_id: friend.id), class: 'invite-link' %>
-      </span>
-      <span class="profile-link">
-        <%= link_to 'Reject',  reject_path(user_id: friend.id), class: 'reject-link' %>
+        <%= link_to 'Cancel Request', user_friendship_path(user_id: friend.id, id: current_user.id), class: 'reject-link', method: :delete %>
       </span>
     </li>
     <% end %>
@@ -34,13 +31,19 @@
 </section>
 
 <section class="users-section">
-  <h2>Friend requests(from me) </h2>
+  <h2>Friend requests(invitations received) </h2>
   <ul class="users-list">
-    <% current_user.pending_friends.each do |friend| %>
+    <% current_user.friend_requests.each do |friend| %>
     <li>
       Name: <%= friend.name %>
       <span class="profile-link">
         <%= link_to 'See Profile',  user_path(friend), class: 'profile-link' %>
+      </span>
+      <span class="profile-link">
+        <%= link_to('Confirm', user_friendship_path(user_id: friend.id, id: current_user.id), class: 'invite-link', method: :patch) %>
+      </span>
+      <span class="profile-link">
+        <%= link_to('Reject', user_friendship_path(user_id: friend.id, id: current_user.id), class: 'reject-link', method: :delete) %>
       </span>
     </li>
     <% end %>

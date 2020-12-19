@@ -10,37 +10,30 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  has_many :friendships
-  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
+  # confirm friends
+  has_many :confirmed_friendships, -> { where status: true }, class_name: 'Friendship'
+  has_many :friends, through: :confirmed_friendships
 
-  # returns all of the other users
-  # who are connected to the given user via a confirmed friendship
-  # or confirmed inverse friendship
-  def friends
-    # user is the friendshiper so we take all of his leaders
-    friends_array = friendships.map { |friendship| friendship.friend if friendship.status == true }
-    # user is the leader so we take all of his friendships
-    friends_array.concat(inverse_friendships.map { |friendship| friendship.user if friendship.status == true })
-    friends_array.compact
-  end
+  # pending_friends(sent from user)
+  # Users who have yet to confirme friend requests
+  has_many :pending_friendships, -> { where status: nil }, class_name: 'Friendship', foreign_key: 'user_id'
+  has_many :pending_friends, through: :pending_friendships, source: :friend
 
-  # Users who have yet to confirm friend requests
-  def pending_friends
-    friendships.map { |friendship| friendship.friend unless friendship.status }.compact
-  end
-
+  # friend_requests(sent to user)
   # Users who have requested to be friends
-  def friend_requests
-    inverse_friendships.map { |friendship| friendship.user unless friendship.status }.compact
-  end
+  has_many :inverted_friendships, -> { where status: nil }, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :friend_requests, through: :inverted_friendships, source: :user
 
-  def confirm_friend(user)
-    friend = inverse_friendships.find { |friendship| friendship.user == user }
+  def confirm_friend(current_user, user)
+    friend = Friendship.find_by(user_id: user.id, friend_id: current_user.id) ||
+             Friendship.find_by(user_id: current_user.id, friend_id: user.id)
     friend.status = true
     friend.save
   end
 
   def friend?(user)
-    friends.include?(user)
+    friendship = Friendship.find_by(user_id: user.id, friend_id: id, status: true) ||
+                 Friendship.find_by(user_id: id, friend_id: user.id, status: true)
+    true unless friendship.nil?
   end
 end

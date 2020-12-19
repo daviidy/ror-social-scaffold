@@ -4,3 +4,10 @@ example_id                                       | status | run_time        |
 ./spec/friendship_spec.rb[1:1:1]                 | passed | 1.62 seconds    |
 ./spec/friendship_spec.rb[1:2:1]                 | passed | 0.05843 seconds |
 ./spec/friendship_spec.rb[1:2:2]                 | passed | 0.01099 seconds |
+./spec/user_spec.rb[1:1:1]                       | passed | 0.02127 seconds |
+./spec/user_spec.rb[1:2:1]                       | passed | 0.05785 seconds |
+./spec/user_spec.rb[1:2:2]                       | passed | 0.24383 seconds |
+./spec/user_spec.rb[1:2:3]                       | passed | 0.01909 seconds |
+./spec/user_spec.rb[1:2:4]                       | passed | 0.02398 seconds |
+./spec/user_spec.rb[1:2:5]                       | passed | 0.01261 seconds |
+./spec/user_spec.rb[1:2:6]                       | passed | 0.00765 seconds |
